@@ -1,5 +1,9 @@
 <service>
 	<serviceName>chiste</serviceName>
+	<serviceAliases>
+		<alias>broma</alias>
+		<alias>joke</alias>
+	</serviceAliases>
 	<serviceDescription><![CDATA[Devuelve un chiste aleatorio que le alegrar&aacute; el d&iacute;a]]></serviceDescription>
 	<creatorEmail>salvi.pascual@gmail.com</creatorEmail>
 	<serviceCategory>ocio</serviceCategory>
