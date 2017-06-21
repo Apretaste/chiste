@@ -52,7 +52,7 @@ class Chiste extends Service {
 
 		// get a random joke, if no joke was found, use a default joke
 		$defaultJoke = "El rey hace un pase de visita a los soldados de guardia y al primero le pregunta: <br/>- A ver ¿por que un soldado de la guardia real tiene que cumplir su tarea ante cualquier circunstancia?! <br/>Y el soldado le responde: <br/> - Si chico, a ver porque eh?! porque eh?!";
-		$j = empty($jokes) ? $defaultJoke : $jokes[mt_rand(1, count($jokes) - 1)];
+		$j = empty($jokes) ? $defaultJoke : $jokes[mt_rand(0, count($jokes) - 1)];
 
 		// clean the joke
 		$j = preg_replace("/\s+/", " ", $j);
