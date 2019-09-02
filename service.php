@@ -75,6 +75,7 @@ class ChisteService extends ApretasteService
         $j = str_replace("<br /><br />", "", $j);
 
         // create response
+        $this->response->setLayout('chiste.ejs');
         $this->response->setTemplate("basic.ejs", ["joke" => $j]);
     }
 
