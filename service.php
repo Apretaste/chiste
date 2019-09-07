@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/vendor/autoload.php';
+
 class ChisteService extends ApretasteService
 {
 
@@ -11,6 +13,17 @@ class ChisteService extends ApretasteService
     public function _main()
     {
         $url = "http://feeds.feedburner.com/ChistesD4w?format=xml";
+        $rss = Feed::loadRss($url);
+
+        $jokes = [];
+
+        foreach ($rss->item as $item) {
+            $jokes[] = [
+                'description' => strip_tags((string)$item->description),
+                'author'      => $item->author
+            ];
+        }
+/*
         // get the latest jokes from the internet
         $page = $this->getUrl($url, $info);
         $jokes = [];
@@ -63,17 +76,20 @@ class ChisteService extends ApretasteService
             }
 
         }
-
+*/
         // get a random joke, if no joke was found, use a default joke
-        $defaultJoke =
-            "El rey hace un pase de visita a los soldados de guardia y al primero le pregunta: <br/>- A ver ¿por que un soldado de la guardia real tiene que cumplir su tarea ante cualquier circunstancia?! <br/>Y el soldado le responde: <br/> - Si chico, a ver porque eh?! porque eh?!";
+        $defaultJoke = [
+            'description' => "El rey hace un pase de visita a los soldados de guardia y al primero le pregunta: <br/>- A ver ¿por que un soldado de la guardia real tiene que cumplir su tarea ante cualquier circunstancia?! <br/>Y el soldado le responde: <br/> - Si chico, a ver porque eh?! porque eh?!",
+            'author' => 'El chiste de siempre'
+        ];
+
         $j = empty($jokes) ? $defaultJoke : $jokes[mt_rand(0, count($jokes) - 1)];
 
         // clean the joke
-        $j = preg_replace("/\s+/", " ", $j);
+        /*$j = preg_replace("/\s+/", " ", $j);
         $j = str_replace("<br /> <br /><br />", "", $j);
         $j = str_replace("<br /><br />", "", $j);
-
+*/
         // create response
         $this->response->setLayout('chiste.ejs');
         $this->response->setTemplate("basic.ejs", ["joke" => $j]);
