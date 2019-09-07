@@ -28,7 +28,7 @@ class ChisteService extends ApretasteService
                 $j = substr($j, 0, $p);
             }
             $j = preg_replace("/\s+/", " ", $j);
-            $j = str_replace(' / ', "\n", $j);
+            $j = str_replace(' / ', " ", $j);
             $j = str_replace("<br /> <br /><br />", "", $j);
             $j = str_replace("<br /><br />", "", $j);
             $j = trim($j);
