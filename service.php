@@ -18,11 +18,12 @@ class ChisteService extends ApretasteService
         $jokes = [];
 
         foreach ($rss->item as $item) {
-            $j = (string) $item->description;
+            $j = html_entity_decode((string) $item->description);
             $j = preg_replace("/\s+/", " ", $j);
             $j = str_replace("<br /> <br /><br />", "", $j);
             $j = str_replace("<br /><br />", "", $j);
-
+            $j = trim($j);
+            if (empty($j)) continue;
             $jokes[] = [
                 'description' => nl2br(strip_tags($j)),
                 'author'      => $item->author
