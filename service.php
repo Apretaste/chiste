@@ -21,7 +21,7 @@ class ChisteService extends ApretasteService
             $j = (string) $item->description;
             $j = preg_replace("/\s+/", " ", $j);
             $j = str_replace("<br /> <br /><br />", "", $j);
-            $j = str_replace("<br /><br />", "", $j)
+            $j = str_replace("<br /><br />", "", $j);
 
             $jokes[] = [
                 'description' => nl2br(strip_tags($j)),
