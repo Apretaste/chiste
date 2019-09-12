@@ -1,14 +1,12 @@
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
-
 class ChisteService extends ApretasteService
 {
 
     /**
      * Function executed when the service is called
      *
-     * @param Request
+     * @throws \FeedException
      */
     public function _main()
     {
