@@ -1,5 +1,10 @@
 <?php
 
+use Goutte\Client;
+use GuzzleHttp\Client as GuzzleClient;
+use Symfony\Component\DomCrawler\Crawler;
+
+
 class ChisteService extends ApretasteService
 {
 
@@ -30,7 +35,32 @@ class ChisteService extends ApretasteService
             $j = str_replace("<br /> <br /><br />", "", $j);
             $j = str_replace("<br /><br />", "", $j);
             $j = trim($j);
-            if (empty($j)) {
+
+            // search joke in subpage
+            if (isset($item->link)) {
+                $crawler = $this->getCrawler($item->link);
+                $j = $crawler->filter('div.singlejoke')->html();
+
+                $p = strpos($j, '</strong>');
+
+                if ($p !== false) {
+                    $j = substr($j, $p + 9);
+                }
+
+                $p = strpos($j, '<div ');
+
+                if ($p !== false) {
+                    $j = substr($j, 0, $p);
+                }
+
+                $j = str_ireplace(['<br />', '<br/>'], "\n", $j);
+
+                while (strpos($j, "\n\n") !== false) {
+                    $j = str_replace("\n\n", "\n", $j);
+                }
+            }
+
+            if (empty($j) || strlen($j) < 25) {
                 continue;
             }
 
@@ -99,5 +129,40 @@ class ChisteService extends ApretasteService
         curl_close($ch);
 
         return $html;
+    }
+
+    /**
+     * Crawler client
+     *
+     * @return \Goutte\Client
+     */
+    public function getClient()
+    {
+        if (is_null($this->client)) {
+            $this->client = new Client();
+            $guzzle = new GuzzleClient(["verify" => false]);
+            $this->client->setClient($guzzle);
+        }
+
+        return $this->client;
+    }
+
+    /**
+     * Get crawler for URL
+     *
+     * @param string $url
+     *
+     * @return \Symfony\Component\DomCrawler\Crawler
+     */
+    protected function getCrawler($url = "")
+    {
+        $url = trim($url);
+        if ($url != '' && $url[0] == '/') {
+            $url = substr($url, 1);
+        }
+
+        $crawler = $this->getClient()->request("GET", $url);
+
+        return $crawler;
     }
 }
