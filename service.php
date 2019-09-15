@@ -8,6 +8,8 @@ use Symfony\Component\DomCrawler\Crawler;
 class ChisteService extends ApretasteService
 {
 
+    private $client;
+
     /**
      * Function executed when the service is called
      *
