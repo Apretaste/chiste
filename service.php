@@ -56,8 +56,11 @@ class ChisteService extends ApretasteService
                 }
 
                 $j = str_ireplace(['<br />', '<br/>'], "", $j);
+                $secret = uniqid();
+                $j = str_replace("...","{{$secret}}", $j);
                 $j = str_replace(".",".\n", $j);
                 $j = str_replace("-","\n-", $j);
+                $j = str_replace("{{$secret}}", "...", $j);
 
                 while (strpos($j, "\n\n") !== false) {
                     $j = str_replace("\n\n", "\n", $j);
