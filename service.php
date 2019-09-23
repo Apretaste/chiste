@@ -55,7 +55,9 @@ class ChisteService extends ApretasteService
                     $j = substr($j, 0, $p);
                 }
 
-                $j = str_ireplace(['<br />', '<br/>'], "\n", $j);
+                $j = str_ireplace(['<br />', '<br/>'], "", $j);
+                $j = str_replace(".",".\n", $j);
+                $j = str_replace("-","\n-", $j);
 
                 while (strpos($j, "\n\n") !== false) {
                     $j = str_replace("\n\n", "\n", $j);
