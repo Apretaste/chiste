@@ -15,6 +15,7 @@ class ChisteService extends ApretasteService
 	 */
 	public function _main()
 	{
+		/*
 		$url = "http://feeds.feedburner.com/ChistesD4w?format=xml";
 		$rss = Feed::load($url);
 
@@ -82,6 +83,8 @@ class ChisteService extends ApretasteService
 		];
 
 		$j = empty($jokes) ? $defaultJoke : $jokes[mt_rand(0, count($jokes) - 1)];
+*/
+		$j = Connection::query("select text from _chiste order by rand(100) limit 1", true, "utf8mb4")[0]->text;
 
 		// create response
 		$this->response->setLayout('chiste.ejs');
