@@ -84,13 +84,13 @@ class ChisteService extends ApretasteService
 
 		$j = empty($jokes) ? $defaultJoke : $jokes[mt_rand(0, count($jokes) - 1)];
 */
-		$j = Connection::query("select text from _chiste order by rand(100) limit 1", true, "utf8mb4")[0]->text;
+		$j = Connection::query("select * from _chiste order by rand() limit 1", true, "utf8mb4");
 
 		// create response
 		$this->response->setLayout('chiste.ejs');
 		$this->response->setTemplate("basic.ejs", ["joke" => [
-			'description' => $j,
-			'author' => 'Desconocido']
+			'description' => $j[0]->text,
+			'author' => $j[0]->cat1 .', '.$j[0]->cat2.', '.$j[0]->cat3 ]
 		]);
 
 		Challenges::complete('view-chiste', $this->request->person->id);
