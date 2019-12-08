@@ -88,7 +88,10 @@ class ChisteService extends ApretasteService
 
 		// create response
 		$this->response->setLayout('chiste.ejs');
-		$this->response->setTemplate("basic.ejs", ["joke" => $j]);
+		$this->response->setTemplate("basic.ejs", ["joke" => [
+			'description' => $j,
+			'author' => 'Desconocido']
+		]);
 
 		Challenges::complete('view-chiste', $this->request->person->id);
 	}
