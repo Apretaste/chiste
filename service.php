@@ -12,7 +12,7 @@ class Service
 	/**
 	 * Function executed when the service is called
 	 *
-	 * @param \Request  $request
+	 * @param \Request $request
 	 * @param \Response $response
 	 *
 	 * @throws \Framework\Alert
@@ -30,5 +30,4 @@ class Service
 
 		Challenges::complete('view-chiste', $request->person->id);
 	}
-
 }
