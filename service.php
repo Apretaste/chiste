@@ -7,27 +7,27 @@ use Apretaste\Response;
 
 class Service
 {
-	private $client;
-
 	/**
 	 * Function executed when the service is called
 	 *
-	 * @param \Request $request
-	 * @param \Response $response
-	 *
-	 * @throws \Framework\Alert
+	 * @param Request $request
+	 * @param Response $response
 	 */
 	public function _main(Request $request, Response &$response)
 	{
-		$j = Database::query("select * from _chiste order by rand() limit 1", true, "utf8mb4");
+		// get random joke from the database
+		$j = Database::query("SELECT * FROM _chiste ORDER BY RAND() LIMIT 1");
 
-		// create response
-		$response->setLayout('chiste.ejs');
-		$response->setTemplate("basic.ejs", ["joke" => [
-			'description' => $j[0]->text,
-			'author' => $j[0]->cat1 .', '.$j[0]->cat2.', '.$j[0]->cat3 ]
-		]);
-
+		// complete challenge
 		Challenges::complete('view-chiste', $request->person->id);
+
+		// create response content
+		$content = [
+			'joke' => $j[0]->text,
+			'tags' => [$j[0]->cat1, $j[0]->cat2, $j[0]->cat3]
+		];
+
+		// send information to the view
+		$response->setTemplate("basic.ejs", $content);
 	}
 }

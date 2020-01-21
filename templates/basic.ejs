@@ -1,18 +1,17 @@
 <div class="row">
-    <div class="col s12 l12 m12">
-        <h1>¡Un chiste, un chiste!</h1>
-    </div>
-</div>
+	<div class="col s12">
+		<h1>¡Un chiste, un chiste!</h1>
 
-<div class="row" style="margin-bottom:60px;">
-    <div class="col s12 l3 m6 xl12 offset-s0 offset-l4 offset-m3">
-		<h4><%- joke.author %></h4>
-		<p><%- joke.description %></p>
-    </div>
+		<% tags.forEach(function(tag) { %>
+			<div class="chip"><%= tag %></div>
+		<% }) %>
+
+		<p><%- joke %></p>
+	</div>
 </div>
 
 <div class="fixed-action-btn">
-    <a class="btn-floating btn-large green" href="#!" onclick="apretaste.send({command: 'CHISTE'});">
-        <i class="material-icons">mood</i>
-    </a>
+	<a class="btn-floating btn-large green" href="#!" onclick="apretaste.send({command:'CHISTE'});">
+		<i class="material-icons">mood</i>
+	</a>
 </div>
