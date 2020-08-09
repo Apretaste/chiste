@@ -7,7 +7,7 @@ $(document).ready(function() {
 
 var share;
 
-function init(term, result) {
+function init(joke, jokeId) {
     share = apretaste.send({
         text: joke.substr(0,100),
         icon: 'grin-squint',
