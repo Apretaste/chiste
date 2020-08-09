@@ -40,12 +40,12 @@
 			text: $('#message').val(),
 			image: '',
 			link: {
-				command: JSON.stringify({
+				command: btoa(JSON.stringify({
 					command: 'CHISTE VER',
 					data: {
 						id: jokeId
 					}
-				}),
+				})),
 				icon: 'mood',
 				text: joke.substr(0, 100)
 			}
