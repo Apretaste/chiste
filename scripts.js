@@ -23,7 +23,7 @@ function share(){
                         id: jokeId
                     }
                 })),
-                icon: 'mood',
+                icon: 'grin-squint',
                 text: joke.substr(0, 100)
             }
         }});
