@@ -36,19 +36,6 @@
 	</div>
 	<div class="modal-footer">
 		<a href="#!" class="modal-close waves-effect waves-light btn-flat">Cerrar</a>
-		<a onclick="apretaste.send({command:'PIZARRA PUBLICAR', data:{
-			text: $('#message').val(),
-			image: '',
-			link: {
-				command: btoa(JSON.stringify({
-					command: 'CHISTE VER',
-					data: {
-						id: jokeId
-					}
-				})),
-				icon: 'mood',
-				text: joke.substr(0, 100)
-			}
-		}})" class="modal-close waves-effect waves-green green-text btn-flat">Enviar</a>
+		<a onclick="share()" class="modal-close waves-effect waves-green green-text btn-flat">Enviar</a>
 	</div>
 </div>
