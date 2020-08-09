@@ -8,29 +8,34 @@ $(document).ready(function() {
 var share;
 
 function init(joke, jokeId) {
-    share = apretaste.send({
-        text: joke.substr(0,100),
+    share = {
+        text: joke.substr(0, 100),
         icon: 'grin-squint',
-        command:'PIZARRA PUBLICAR',
-        redirect: false,
-        callback: {
-            name: 'toast',
-            data: 'Tu chiste fue compartido en Pizarra'
-        },
-        data: {
-            text: $('#message').val(),
-            image: '',
-            link: {
-                command: btoa(JSON.stringify({
-                    command: 'CHISTE VER',
-                    data: {
-                        id: jokeId
+        send: function () {
+            apretaste.send({
+                command: 'PIZARRA PUBLICAR',
+                redirect: false,
+                callback: {
+                    name: 'toast',
+                    data: 'Tu chiste fue compartido en Pizarra'
+                },
+                data: {
+                    text: $('#message').val(),
+                    image: '',
+                    link: {
+                        command: btoa(JSON.stringify({
+                            command: 'CHISTE VER',
+                            data: {
+                                id: jokeId
+                            }
+                        })),
+                        icon: share.icon,
+                        text: share.text
                     }
-                })),
-                icon: share.icon,
-                text: share.text
-            }
-        }});
+                }
+            })
+        }
+    };
 }
 
 function toast(message){
