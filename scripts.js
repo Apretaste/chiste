@@ -5,8 +5,12 @@ $(document).ready(function() {
     $('.sidenav').sidenav();
 });
 
-function share(){
-    apretaste.send({
+var share;
+
+function init(term, result) {
+    share = apretaste.send({
+        text: joke.substr(0,100),
+        icon: 'grin-squint',
         command:'PIZARRA PUBLICAR',
         redirect: false,
         callback: {
@@ -23,8 +27,8 @@ function share(){
                         id: jokeId
                     }
                 })),
-                icon: 'grin-squint',
-                text: joke.substr(0, 100)
+                icon: share.icon,
+                text: share.text
             }
         }});
 }
