@@ -6,14 +6,16 @@ $(document).ready(function() {
 });
 
 function share(){
-    apretaste.send({command:'PIZARRA PUBLICAR', data:{
+    apretaste.send({
+        command:'PIZARRA PUBLICAR',
+        redirect: false,
+        callback: {
+            name: 'toast',
+            data: 'Tu chiste fue compartido en Pizarra'
+        },
+        data: {
             text: $('#message').val(),
             image: '',
-            redirect: false,
-            callback: {
-                name: 'toast',
-                data: 'Tu chiste compartido en Pizarra'
-            },
             link: {
                 command: btoa(JSON.stringify({
                     command: 'CHISTE VER',
