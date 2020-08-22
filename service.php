@@ -18,7 +18,7 @@ class Service
 	{
 		// get random joke from the database
 		if (isset($request->input->data->id)) {
-			$j = Database::queryFirst("SELECT * FROM _chiste id = {$request->input->data->id}");
+			$j = Database::queryFirst("SELECT * FROM _chiste WHERE id = {$request->input->data->id}");
 		} else {
 			$j = Database::queryFirst("SELECT * FROM _chiste ORDER BY RAND() LIMIT 1");
 		}
