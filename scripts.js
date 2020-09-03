@@ -9,7 +9,7 @@ var share;
 
 function init(joke, jokeId) {
     share = {
-        text: joke.substr(0, 100),
+        text: joke.substr(0, 50) + '...',
         icon: 'grin-squint',
         send: function () {
             apretaste.send({
