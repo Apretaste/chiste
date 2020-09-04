@@ -2,11 +2,15 @@ $(document).ready(function() {
 	$('.modal').modal();
 });
 
+function teaser(text) {
+	return text.length <= 50 ? text : text.substr(0, 50) + "...";
+}
+
 var share;
 
 function init(joke, jokeId) {
 	share = {
-		text: joke.substr(0, 50),
+		text: teaser(joke),
 		icon: 'grin-squint',
 		send: function () {
 			apretaste.send({
